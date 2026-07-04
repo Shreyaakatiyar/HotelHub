@@ -1,7 +1,10 @@
+import Navbar from "../../components/Navbar/Navbar"
 
 const Favourites = () => {
   return (
-    <div>Favourites</div>
+    <div>
+      <Navbar/>
+    </div>
   )
 }
 
