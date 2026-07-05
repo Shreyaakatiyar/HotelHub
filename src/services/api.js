@@ -42,7 +42,7 @@ export async function getHotels(filters = {}) {
 
   // Add ordering/sorting
   if (filters.sortBy) {
-    params.append("ordering", filters.sortBy);
+    params.append("order_by", filters.sortBy);
   }
 
   const queryString = params.toString();
