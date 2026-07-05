@@ -1,16 +1,23 @@
-import './SearchBar.css'
+import "./SearchBar.css";
 
-const SearchBar = () => {
+const SearchBar = ({ searchInput, setSearchInput, setSearch }) => {
+  const handleSearch = () => {
+    setSearch(searchInput);
+    setSearchInput("");
+  };
+
   return (
     <div className="search-box">
-        <input
+      <input
         type="text"
-        placeholder="Search hotels, cities or locations..."
-        />
+        value={searchInput}
+        onChange={(e) => setSearchInput(e.target.value)}
+        placeholder="Search hotels..."
+      />
 
-        <button>Search</button>
+      <button onClick={handleSearch}>Search</button>
     </div>
-  )
-}
+  );
+};
 
-export default SearchBar
+export default SearchBar;

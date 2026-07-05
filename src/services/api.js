@@ -1,18 +1,19 @@
 const BASE_URL = "https://demohotelsapi.pythonanywhere.com/hotels/";
 
-export async function getHotels() {
-  try {
-    const response = await fetch(BASE_URL);
+export async function getHotels(search = "") {
+  let url = BASE_URL;
 
-    if (!response.ok) {
-      throw new Error("Failed to fetch hotels");
-    }
-
-    const data = await response.json();
-
-    return data.data; // 👈 Return only the array
-  } catch (error) {
-    console.error(error);
-    throw error;
+  if (search.trim() !== "") {
+    url += `?search=${encodeURIComponent(search)}`;
   }
+
+  const response = await fetch(url);
+
+  if (!response.ok) {
+    throw new Error("Failed to fetch hotels");
+  }
+
+  const data = await response.json();
+
+  return data.data;
 }

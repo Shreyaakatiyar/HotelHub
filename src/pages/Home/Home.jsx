@@ -9,12 +9,14 @@ const Home = () => {
   const [hotels, setHotels] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const [searchInput, setSearchInput] = useState("");
+  const [search, setSearch] = useState("");
 
 
   useEffect(() => {
     const fetchHotels = async () => {
       try {
-        const hotels = await getHotels();
+        const hotels = await getHotels(search);
         setHotels(hotels);
       } catch (err) {
         setError(err.message);
@@ -24,11 +26,15 @@ const Home = () => {
     };
 
     fetchHotels();
-  }, []);
+  }, [search]);
 
   return (
     <>
-      <Hero />
+      <Hero
+        searchInput={searchInput}
+        setSearchInput={setSearchInput}
+        setSearch={setSearch}
+      />
       <Filters />
 
       <section className="hotel-section">
