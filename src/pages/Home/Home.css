@@ -1,0 +1,15 @@
+.hotel-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(340px,1fr));
+
+    gap:35px;
+}
+
+.hotel-section{
+
+    padding:120px 70px;
+
+    background:#F8FAFC;
+}

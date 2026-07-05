@@ -1,31 +1,48 @@
-import Filters from "../../components/Filters/Filters"
-import Hero from "../../components/Hero/Hero"
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import Hero from "../../components/Hero/Hero";
+import Filters from "../../components/Filters/Filters";
+import { getHotels } from "../../services/api";
+import HotelCard from "../../components/HotelCard/HotelCard";
+import "./Home.css";
 
 const Home = () => {
+  const [hotels, setHotels] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+
 
   useEffect(() => {
-    async function testApi() {
+    const fetchHotels = async () => {
       try {
-        const response = await fetch(
-          "https://demohotelsapi.pythonanywhere.com/hotels/"
-        );
-        const data = await response.json();
-
-        console.log("Data:", data);
-      } catch (error) {
-        console.error("Fetch Error:", error);
+        const hotels = await getHotels();
+        setHotels(hotels);
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
       }
-    }
+    };
 
-    testApi();
+    fetchHotels();
   }, []);
 
   return (
-    <div>
+    <>
       <Hero />
       <Filters />
-    </div>
+
+      <section className="hotel-section">
+        <div className="hotel-grid">
+          {hotels.map((hotel) => (
+            <HotelCard key={hotel.id} hotel={hotel} />
+          ))}
+        </div>
+      </section>
+
+      {loading && <h2>Loading Hotels...</h2>}
+
+      {error && <h2>{error}</h2>}
+    </>
   );
 };
 
