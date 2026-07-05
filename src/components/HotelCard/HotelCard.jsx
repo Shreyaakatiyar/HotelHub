@@ -1,7 +1,19 @@
 import "./HotelCard.css";
 import { Link } from "react-router-dom";
+import { useFavourites } from "../../context/FavouriteContext";
 
 const HotelCard = ({ hotel }) => {
+  const { addFavourite, removeFavourite, isFavourite } = useFavourites();
+  const favourite = isFavourite(hotel.id);
+
+  const handleFavouriteToggle = () => {
+    if (favourite) {
+      removeFavourite(hotel.id);
+    } else {
+      addFavourite(hotel);
+    }
+  };
+
   return (
     <div className="hotel-card">
       <div className="image-container">
@@ -14,6 +26,14 @@ const HotelCard = ({ hotel }) => {
         <div className="rating-badge">
           ⭐ {hotel.rating}
         </div>
+
+        <button
+          className={`favourite-btn ${favourite ? "active" : ""}`}
+          onClick={handleFavouriteToggle}
+          title={favourite ? "Remove from favourites" : "Add to favourites"}
+        >
+          {favourite ? "❤️" : "🤍"}
+        </button>
       </div>
 
       <div className="hotel-info">

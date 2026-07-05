@@ -14,6 +14,12 @@ const Home = () => {
   const [priceFilter, setPriceFilter] = useState("");
   const [ratingFilter, setRatingFilter] = useState("");
   const [sortBy, setSortBy] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+  const hotelsPerPage = 6;
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [search, priceFilter, ratingFilter, sortBy])
 
   useEffect(() => {
     const fetchHotels = async () => {
@@ -21,9 +27,10 @@ const Home = () => {
         setLoading(true);
         const filters = {
           search: search,
+          limit: hotelsPerPage,
+          skip: (currentPage - 1) * hotelsPerPage,
         };
 
-        // Handle price filter
         if (priceFilter === "below") {
           filters.maxPrice = 2000;
         } else if (priceFilter === "2000-5000") {
@@ -33,7 +40,6 @@ const Home = () => {
           filters.minPrice = 5000;
         }
 
-        // Handle rating filter
         if (ratingFilter === "5") {
           filters.rating = 5;
         } else if (ratingFilter === "4") {
@@ -61,7 +67,7 @@ const Home = () => {
     };
 
     fetchHotels();
-  }, [search, priceFilter, ratingFilter, sortBy]);
+  }, [search, priceFilter, ratingFilter, sortBy, currentPage]);
 
   return (
     <>
@@ -86,6 +92,24 @@ const Home = () => {
           ))}
         </div>
       </section>
+
+      {hotels.length > 0 && (
+        <div className="pagination">
+          <button
+            onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
+            disabled={currentPage === 1}
+          >
+            ← Previous
+          </button>
+          <span className="page-info">Page {currentPage}</span>
+          <button
+            onClick={() => setCurrentPage(prev => prev + 1)}
+            disabled={hotels.length < hotelsPerPage}
+          >
+            Next →
+          </button>
+        </div>
+      )}
 
       {loading && <h2>Loading Hotels...</h2>}
 

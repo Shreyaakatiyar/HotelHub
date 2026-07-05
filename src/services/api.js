@@ -45,6 +45,14 @@ export async function getHotels(filters = {}) {
     params.append("order_by", filters.sortBy);
   }
 
+  // Add pagination parameters
+  if (filters.limit) {
+    params.append("limit", filters.limit);
+  }
+  if (filters.skip) {
+    params.append("skip", filters.skip);
+  }
+
   const queryString = params.toString();
   if (queryString) {
     url += `?${queryString}`;

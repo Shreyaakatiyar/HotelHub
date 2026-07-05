@@ -138,3 +138,29 @@
 
     background:#1d4ed8;
 }
+
+.favourite-btn{
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    background: white;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    font-size: 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 5px 15px rgba(0,0,0,.15);
+    transition: .3s;
+}
+
+.favourite-btn:hover{
+    transform: scale(1.15);
+}
+
+.favourite-btn.active{
+    background: #fef3c7;
+}

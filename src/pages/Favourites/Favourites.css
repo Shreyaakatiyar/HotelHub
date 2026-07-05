@@ -1,17 +1,44 @@
-.hotel-grid{
-
-    display:grid;
-
-    grid-template-columns:repeat(auto-fit,minmax(340px,1fr));
-
-    gap:35px;
+.favourites-section {
+  padding: 120px 70px;
+  background: #F8FAFC;
 }
 
-.hotel-section{
+.favourites-header {
+  margin-bottom: 50px;
+  text-align: center;
+}
 
-    padding:120px 70px;
+.favourites-header h1 {
+  font-size: 36px;
+  color: #111827;
+  margin-bottom: 10px;
+}
 
-    background:#F8FAFC;
+.favourites-header p {
+  font-size: 16px;
+  color: #6B7280;
+}
+
+.hotel-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: 35px;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 60px 20px;
+}
+
+.empty-state h2 {
+  font-size: 28px;
+  color: #111827;
+  margin-bottom: 15px;
+}
+
+.empty-state p {
+  font-size: 16px;
+  color: #6B7280;
 }
 
 .pagination {
@@ -21,7 +48,6 @@
   gap: 20px;
   margin-top: 50px;
   margin-bottom: 50px;
-  padding: 0 70px;
 }
 
 .pagination button {
